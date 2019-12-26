@@ -17,7 +17,7 @@ var exec = item => {
   });
 };
 
-var items = new Array(10000).fill().map((_, i) => i);
+var items = new Array(1000).fill().map((_, i) => i);
 var timer = setInterval(() => {
   items.splice(0, 10).forEach(item => {
     console.log('push', item);
