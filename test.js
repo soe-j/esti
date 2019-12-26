@@ -17,14 +17,12 @@ var exec = item => {
   });
 };
 
-["A", "B"].forEach(type => {
-  new Array(100)
-    .fill()
-    .map((_, i) => `${type}${i}`)
-    .forEach(item => {
-      console.log("push", item);
-      queue.push(item);
-    });
-});
+var items = new Array(10000).fill().map((_, i) => i);
+var timer = setInterval(() => {
+  items.splice(0, 10).forEach(item => {
+    console.log('push', item);
+    queue.push(item);
+  })
 
-console.log("loaded!");
+  if (!items.length) clearInterval(timer);
+}, 500);
