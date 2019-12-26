@@ -1,28 +1,30 @@
-const Queue = require('./index');
-const queue = Queue.create({
-  jobs: 10,
-  log: true,
-  timeout: 10000, // millisecond
-  gracePeriod: 30000 // millisecond
-});
-queue.ready();
+const async = require("async");
 
-new Array(100).fill().forEach(item => {
-  const func = () => {
-    return new Promise((resolve, reject) => {
-      try {
-        setTimeout(() => {
-          resolve(item)
-        }, 1000);
-      } catch (err) {
-        reject(err)
-      }
+var queue = async.queue(async item => {
+  await exec(item);
+}, 10);
+
+var exec = item => {
+  return new Promise((resolve, reject) => {
+    try {
+      setTimeout(() => {
+        console.log("complete", item);
+        resolve(item);
+      }, 1000);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+["A", "B"].forEach(type => {
+  new Array(100)
+    .fill()
+    .map((_, i) => `${type}${i}`)
+    .forEach(item => {
+      console.log("push", item);
+      queue.push(item);
     });
-  };
-
-  queue.push(func);
 });
 
-queue.on('end', () => {
-  console.log('FINISH!');
-});
+console.log("loaded!");
