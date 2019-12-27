@@ -2,9 +2,12 @@
 estimate finish time
 
 ## usage
+~~~shell
+$ npm i soe-j/esti
+~~~
 ~~~js
 const async = require("async");
-const esti = require("./index");
+const esti = require("esti");
 const graph = esti.createGraph();
 
 var queue = async.queue(async task => {
