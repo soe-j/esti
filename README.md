@@ -12,11 +12,11 @@ var queue = async.queue(async task => {
 
   graph.pop(1); // finish task count
   console.log(graph.estimate())
-  // => {
-  //      totalDuration: 100997,
-  //      remainingDuration: 0,
-  //      finishTime: 2019-12-26T10:46:10.999Z
-  //    }
+  // =>
+  // { totalDuration: 101098.0980980981,
+  //   remainingDuration: 101.09809809809667,
+  //   finishTime: 2019-12-26T10:46:11.100Z }
+
 }, 10);
 
 const taskNumList = new Array(10000).fill().map((_, i) => i);
